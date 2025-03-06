@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background: linear-gradient(to bottom, #1E88E5, #A1C4FD);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 50%;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .task-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width:100%;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .add-btn {
+            background: #FF5722;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .task-list {
+            text-align: left;
+        }
+
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fafafa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .actions button {
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            margin-left: 5px;
+        }
+
+        .check-btn {
+            background: #28A745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .delete-btn {
+            background: #FF5722;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <form action="/add" method="post" class="task-form">
+            <div class="form-group">
+                <label for="task">Task:</label>
+                <input type="text" id="task" name="task" placeholder="Add a new task..." required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="task" required>
+            </div>
+            <button type="submit" class="add-btn">Add Task</button>
+        </form>
+        <div class="task-list">
+            <% todo.forEach((task, index) => { %>
+                <div class="task">
+                    <span><%= task %></span>
+                    <div class="actions">
+                        <a href="/complete/<%= index %>"><button class="check-btn">✔</button></a>
+                        <a href="/delete/<%= index %>"><button class="delete-btn">🗑</button></a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>
