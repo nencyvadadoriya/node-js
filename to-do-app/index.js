@@ -16,9 +16,9 @@ app.get('/', (req, res) => {
     res.render('index', { todo, completedtodo }); // Render index.ejs with data
 });
 
-// Route to handle adding a new task
+// Route to handle adding a new taskc:\to-do-app
 app.post('/add', (req, res) => {
-    const newTask = req.body.task; // Get the new task from the form
+    const newTask = req.body.task; // Get the new task from the formc:\to-do-app
     todo.push(newTask); // Add the new task to the to-do list
     res.redirect('/currentdata'); // Redirect to the currentdata page
 });
