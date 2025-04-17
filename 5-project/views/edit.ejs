@@ -100,7 +100,7 @@
                 <label class="form-label">Genre</label>
                 <select class="form-select" name="Genre">
                     <option value="">Select Genre</option>
-                    <% let genres=["Action", "Thriller" , "Horror" , "Romance" , "Drama" ]; %>
+                    <% let genres=["Comedy" , "Horror" , "Historical" , "Romance" ]; %>
                         <% genres.forEach((genre)=> { %>
                             <option value="<%= genre %>" <%=record.Genre===genre ? 'selected' : '' %>>
                                 <%= genre %>

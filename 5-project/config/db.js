@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoUrl = ('mongodb://localhost:27017/movie');
+const mongoUrl = ('mongodb://localhost:27017/movies');
 const db=mongoose.connection;
 mongoose.connect(mongoUrl);
 db.on('connected', () => console.log('DataBase is Connected..'));

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Movies</title>
@@ -14,15 +13,13 @@
             background-color: black;
             color: white;
         }
-
         .movie-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 16px;
         }
-
         .movie-card {
-            width: calc(20% - 13px); /* 5 cards per row with gap */
+            width: calc(20% - 13px); 
             border-radius: 10px;
             overflow: hidden;
             position: relative;
@@ -31,54 +28,25 @@
             border: 1px solid #660000;
             box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
         }
-
         .movie-card:hover {
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
         }
-
         .movie-thumb {
             width: 100%;
             height: 270px;
             object-fit: cover;
         }
-
         .overlay-gradient {
             background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
         }
-
         .blood-text {
             color: #ff1a1a;
             font-family: 'Creepster', cursive;
             text-shadow: 1px 1px 2px #000;
         }
-
         .text-shadow {
             text-shadow: 2px 2px 4px #990000;
-        }
-
-        @media (max-width: 1200px) {
-            .movie-card {
-                width: calc(25% - 12px); /* 4 per row */
-            }
-        }
-
-        @media (max-width: 992px) {
-            .movie-card {
-                width: calc(33.33% - 11px); /* 3 per row */
-            }
-        }
-
-        @media (max-width: 768px) {
-            .movie-card {
-                width: calc(50% - 8px); /* 2 per row */
-            }
-        }
-
-        @media (max-width: 576px) {
-            .movie-card {
-                width: 100%; /* 1 per row */
-            }
         }
     </style>
 </head>
@@ -86,6 +54,7 @@
 <body>
     <section class="container py-4">
         <h4 class="text-danger text-shadow mb-4">Continue Watching</h4>
+        <a href="/" class="btn btn-light my-4">Back To Home</a>
         <div class="movie-grid">
             <!-- Movie Cards -->
             <div class="movie-card text-white">
@@ -151,5 +120,4 @@
         </div>
     </section>
 </body>
-
 </html>

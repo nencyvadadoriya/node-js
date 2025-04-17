@@ -23,10 +23,9 @@ route.get('/delete/:id', controllers.DeletMovie)
 route.post('/edit/:id', movie.single('avatar'), controllers.EditMovie);
 route.get('/update/:id', controllers.UpdateMovie);
 route.get('/horrer', controllers.horrerPage);
-
+route.get('/freeMovie', controllers.freeMoviePage);
+route.get('/allMovie', controllers.AllMoviePage);
 route.get('/indetails/:id' , controllers.inDetailsPage);
-
-//card indetails
 route.get('/CardInDetails', controllers.CardInDetails);
 
 module.exports = route;

@@ -20,7 +20,7 @@ const movieschema = new mongoose.Schema({
     avatar: {
         type: String,
         required: true 
-    }
+    } ,
 })
 
 module.exports = mongoose.model('movie', movieschema)
