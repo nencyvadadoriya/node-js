@@ -1,0 +1,9 @@
+apple product managment syestm
+
+
+product name
+image
+price
+des
+color
+category
