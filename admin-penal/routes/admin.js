@@ -1,6 +1,7 @@
 const express = require('express');
 const route = express.Router();
 const controllers = require('../controllers/adminController');
+const restrict = require('../middelware/authentication')
 const adminModel = require('../models/adminModel');
 const passport = require('passport');
 const passportLocal = require('passport-local').Strategy;
@@ -14,12 +15,14 @@ route.post('/login', controllers.userChecked);
 route.get('/logout', controllers.logout);
 
 // ===================== password logics  =========================
-route.get('/lostPasswordPage', controllers.lostPasswordPage);
-route.post('/verifyOtp', controllers.checkEmail);
-route.get('/otpVerifyPage', controllers.otpVerifyPage);
-route.post('/checkOtp', controllers.checkOtp);
-route.get('/newSetPassword', controllers.newsetpassword);
-route.post('/checknewpassword', controllers.checknewpassword);
+route.get('/lostPasswordPage', restrict, controllers.lostPasswordPage);
+route.post('/verifyOtp', restrict, controllers.checkEmail);
+route.get('/otpVerifyPage', restrict, controllers.otpVerifyPage);
+route.post('/checkOtp', restrict, controllers.checkOtp);
+route.get('/newSetPassword', restrict, controllers.newsetpassword);
+route.post('/checknewpassword', restrict, controllers.checknewpassword);
+
+// ============= change password admin =========================
 route.get('/changePassword', controllers.changePassword);
 route.post('/changemypassword', controllers.changemypassword); 
 
@@ -38,6 +41,8 @@ route.post('/insert', upload.single('avatar'),controllers.insertAdmin)
 route.get('/delete-addmin/:DeleteId', controllers.DeleteAdmin);
 route.get('/updateAdmin', upload.single('avatar'), controllers.UpdateAdmin);
 route.post('/editAdmin/:editId', upload.single('avatar'), controllers.editAdmin);
+
+
 
 
 // ================ passport logic ========================
@@ -84,5 +89,7 @@ passport.deserializeUser(async function (id, done) {
         done(err, false);
     }
 });
+
+
 
 module.exports =  route ,  passport;

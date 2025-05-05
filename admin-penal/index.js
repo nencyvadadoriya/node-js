@@ -19,7 +19,6 @@ app.use(session({
     secret: 'my-admin',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
 }));
 
 app.use(flash());
