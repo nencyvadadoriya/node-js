@@ -56,7 +56,7 @@ const checkEmail = async (req, res) => {
             });
 
             const mailOptions = {
-                from: '"Admin Panel" <your_email@gmail.com>',
+                from: '"Admin Panel" vadadoriyanency8@gmail.com',
                 to: email,
                 subject: "OTP for Password Reset",
                 html: `
