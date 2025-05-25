@@ -23,7 +23,6 @@ const logout = (req, res) => {
     res.redirect('/');
 };
 
-
 // ====================== password logic=======================================
 
 // lost password
@@ -139,7 +138,7 @@ const checknewpassword = async (req, res) => {
         res.clearCookie('email');
         res.clearCookie('otp');
         req.flash('success', 'Password changed successfully. Please login.');
-        return res.redirect('/'); 
+        return res.redirect('/');
     } catch (err) {
         req.flash('error', 'Something went wrong. Please try again.');
         return res.redirect('/newSetPassword');

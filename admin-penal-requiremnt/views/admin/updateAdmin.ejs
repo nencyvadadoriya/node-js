@@ -1,0 +1,82 @@
+<%- include('../header') %>
+
+    <main class="main px-4 py-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="form-wrapper" style="margin-left: 10px; max-width: 600px; width: 100%;">
+                    <div class="card shadow border-0">
+                        <div class="card-header  text-white">
+                            <h4 class="mb-0">Add Admin</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="/editAdmin/<%= data._id %>" method="post" enctype="multipart/form-data">
+                                <!-- First Name -->
+                                <div class="form-group mb-3">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" class="form-control" id="fname" name="fname"
+                                        placeholder="Enter Your First Name"  value="<%= data.fname %>" />
+                                </div>
+                                <!-- Last Name -->
+                                <div class="form-group mb-3">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" class="form-control" id="lname" name="lname"
+                                        placeholder="Enter Your Last Name"  value="<%= data.lname %>" />
+                                </div>
+                                <!-- Email -->
+                                <div class="form-group mb-3">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="Enter Email"  value="<%= data.email %>" />
+                                </div>
+                                <!-- Password -->
+                                <div class="form-group mb-3">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Password"  value="<%= data.password %>" />
+                                </div>
+                                <!-- gender  -->
+                                <div class="form-group">
+                                    <label>Gender</label><br />
+                                    <div class="d-flex">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" value="male"
+                                                <%=data.gender==='male' ? 'checked' : '' %> /> Male
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" value="female"
+                                                <%=data.gender==='female' ? 'checked' : '' %> /> Female
+                                        </div>
+                                    </div>
+                                </div>
+                                 <!-- city  -->
+                                 <div class="form-group">
+                                    <label>City</label>
+                                    <div class="col-md-9">
+                                        <% let myCity = ['Surat', 'Baroda', 'Rajkot', 'Mumbai']; %>
+                                        <select class="select2 form-select shadow-none" style="width: 100%; height: 36px" name="city">
+                                            <option>Select</option>
+                                            <% myCity.forEach(city => { %>
+                                                <option value="<%= city %>" <%= data.city === city ? 'selected' : '' %>><%= city %></option>
+                                            <% }) %>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- image  -->
+                                <div class="form-group">
+                                    <label>Avatar</label>
+                                    <input type="file" class="form-control-file" id="image"  name="image" />
+                                    <img src="../<%= data.image %>" height="80px" class="mt-2"/>
+                                </div>
+                                <!-- Submit -->
+                                <div class="text-start">
+                                    <button type="submit" class="btn btn-success">Add Admin</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include("../footer") %>
+    </main>

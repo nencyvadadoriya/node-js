@@ -1,0 +1,72 @@
+<%- include('../header') %>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <% if (success && success.length> 0) { %>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '<%= success %>',
+                confirmButtonColor: '#28a745'
+            });
+        </script>
+        <% } %>
+
+            <% if (error && error.length> 0) { %>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: '<%= error %>',
+                        confirmButtonColor: '#dc3545'
+                    });
+                </script>
+                <% } %>
+
+                    <div class="page-wrapper">
+                        <div class="container-fluid py-4" style="min-height: 550px;">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8 col-md-10">
+                                    <div class="card shadow rounded-3 border-0">
+                                        <div class="card-body p-4">
+                                            <h4 class="card-title mb-4 text-center">Add SubCategory</h4>
+                                            <form method="post" action="/subcategory/insertsubcategory">
+
+                                                <!-- Category Selection -->
+                                                <div class="mb-3">
+                                                    <label for="category_id" class="form-label">Select Category</label>
+                                                    <select class="form-select" name="category_id" id="category_id"
+                                                        required>
+                                                        <option value="">Select</option>
+                                                        <% allCategory.map((category )=> { %>
+                                                            <option value="<%= category.id %>">
+                                                                <%= category.category_title %>
+                                                            </option>
+                                                            <% }); %>
+                                                    </select>
+                                                </div>
+
+                                                <!-- SubCategory Title -->
+                                                <div class="mb-3">
+                                                    <label for="subcategory_title" class="form-label">SubCategory
+                                                        Title</label>
+                                                    <input type="text" class="form-control" name="subcategory_title"
+                                                        placeholder="Enter SubCategory Title" required>
+                                                </div>
+
+                                                <!-- Submit Button -->
+                                                <div class="text-end">
+                                                    <button type="submit" class="btn btn-primary px-4">Add
+                                                        SubCategory</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%- include('../footer') %>
