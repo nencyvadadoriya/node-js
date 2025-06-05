@@ -1,6 +1,7 @@
 const express = require('express');
 const route = express.Router();
 const { addextracategorypage, insertcategory, viewextracategorypage, deleteExtracategory, editExtraCategory, updateExtracategorypage } = require('../controller/addextracategory');
+const upload = require('../middelware/extracategoryMulter');
 
 route.get('/addextracategorypage', addextracategorypage);
 route.post('/insertextracategory', insertcategory);

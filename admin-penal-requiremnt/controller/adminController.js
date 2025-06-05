@@ -4,13 +4,19 @@ const fs = require('fs');
 
 // login page
 const loginPage = (req, res) => {
-    res.render('login', { success: req.flash('success'), error: req.flash('error') });
+    const error = req.session.message;
+    console.log("LOGIN : --------------", error);
+
+    res.render('login', { success: req.flash('success'), error: error });
+
+    req.session.message = undefined;
 };
 
 // user checked
 const userChecked = async (req, res) => {
     try {
-        req.flash('success', "Admin Login Successfully...");
+        const currentAdmin = req.user;
+        req.flash('success', `${currentAdmin.fname + " " + currentAdmin.lname} Login Successfully...`);
         res.redirect('/homepage');
     } catch (e) {
         res.send(`<p> Not Found : ${e} </p>`);
@@ -166,7 +172,7 @@ const checknewpassword = async (req, res) => {
 const changePassword = (req, res) => {
     try {
         const currentAdmin = req.user;
-        res.render('admin/changepassword', { currentAdmin, success: req.flash('success') , error: req.flash('error') });
+        res.render('admin/changepassword', { currentAdmin, success: req.flash('success'), error: req.flash('error') });
     } catch (error) {
         res.send(`<h2> Not found : ${error} </h2>`);
     }
@@ -231,7 +237,7 @@ const updateProfile = async (req, res) => {
             res.send("<p>error : Admin not logged in</p>");
         }
         const currentAdmin = req.user;
-        res.render('admin/updateprofile', { currentAdmin,  success: req.flash('success'),  error: req.flash('error'), });
+        res.render('admin/updateprofile', { currentAdmin, success: req.flash('success'), error: req.flash('error'), });
     } catch (error) {
         res.send(`<h2> Not found : ${error} </h2>`);
     }
@@ -252,12 +258,12 @@ const editProfile = async (req, res) => {
         console.log("Updated Data:", updatedAdmin);
 
         if (updatedAdmin) {
-            req.flash('success', 'Profile updated successfully!'); 
+            req.flash('success', 'Profile updated successfully!');
             res.cookie('admin', updatedAdmin);
-            res.redirect('/homepage'); 
+            res.redirect('/homepage');
         } else {
-            req.flash('error', 'Profile update failed. Please try again.');  
-            res.redirect('/updateprofile'); 
+            req.flash('error', 'Profile update failed. Please try again.');
+            res.redirect('/updateprofile');
         }
     } catch (error) {
         res.send(`<h2> Not found: ${error} </h2>`);
@@ -269,11 +275,8 @@ const editProfile = async (req, res) => {
 // dashboard page
 const homepage = async (req, res) => {
     try {
-        if (!req.user) {
-            return res.redirect('/login');
-        }
         const currentAdmin = req.user;
-        res.render('admin/homepage', { currentAdmin, success: req.flash('success'), error: req.flash('error')});
+        res.render('admin/homepage', { currentAdmin, success: req.flash('success'), error: req.flash('error') });
     } catch (error) {
         res.send(`<h2>Error: ${error}</h2>`);
     }
@@ -285,7 +288,7 @@ const addAdminPage = (req, res) => {
         const currentAdmin = req.user;
         const success = req.flash('success');
         const error = req.flash('error');
-        res.render('admin/addAdmin', { currentAdmin ,success, error });
+        res.render('admin/addAdmin', { currentAdmin, success, error });
     } catch (error) {
         res.send(`<h2> Not found : ${error.message} </h2>`);
     }
@@ -375,8 +378,8 @@ const editAdmin = async (req, res) => {
         } else {
             req.body.image = data.image;
         }
-
         await admin.findByIdAndUpdate(editId, req.body);
+        req.flash('success', ' edit admin successfully!');
         res.redirect('/viewAdmin');
     } catch (error) {
         res.send(`<h2> Not found: ${error} </h2>`);

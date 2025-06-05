@@ -131,27 +131,30 @@ const updateProductpage = async (req, res) => {
 const editProductPage = async (req, res) => {
     try {
         const id = req.params.id;
+        const existingProduct = await product.findById(id);
 
+        if (!existingProduct) {
+            req.flash("error", "Product not found");
+            return res.redirect("/product/viewProductPage");
+        }
         if (req.file) {
+            if (existingProduct.product_image) {
+                fs.unlinkSync(existingProduct.product_image);
+            }
             req.body.product_image = req.file.path;
         }
 
         const updatedProduct = await product.findByIdAndUpdate(id, req.body);
 
-        if (!updatedProduct) {
-            req.flash("error", "Product not found");
-            return res.redirect("/product/viewProductPage");
-        }
-
         req.flash("success", "Product updated successfully");
         res.redirect("/product/viewProductPage");
+
     } catch (error) {
         console.error(error);
         req.flash("error", "Error updating product");
         res.redirect("/product/viewProductPage");
     }
 };
-
 
 module.exports = {
     addproductPage,

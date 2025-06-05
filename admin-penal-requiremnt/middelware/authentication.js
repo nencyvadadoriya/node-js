@@ -1,11 +1,12 @@
 const admin = require('../model/adminModel');
 const passport = require('passport');
-const localStrategy = require('passport-local').Strategy; 
+const localStrategy = require('passport-local').Strategy;
 
 // passport
-passport.use('local',new localStrategy({
+passport.use('local', new localStrategy({
     usernameField: 'email',
-}, async function (email, password, done) {
+    passReqToCallback: true,
+}, async function (req, email, password, done) {
     console.log(`Email: ${email}, Password: ${password}`);
 
     const adminData = await admin.findOne({ email: email });
@@ -15,12 +16,14 @@ passport.use('local',new localStrategy({
             console.log('Login Successfully....');
             return done(null, adminData);
         } else {
+            req.session.message = "Incorrect password";
             console.log('Wrong Password....');
-            return done(null, false, { message: 'Incorrect password' });
+            return done(null, false);
         }
     } else {
+        req.session.message = "No user with that email";
         console.log('Wrong Email....');
-        return done(null, false, { message: 'No user with that email' });
+        return done(null, false, { message: 'No user email found' });
     }
 }));
 
@@ -58,9 +61,9 @@ passport.checkLostPasswordAuthentication = function (req, res, next) {
     console.log("Auth Middleware is called....");
 
     if (req.isAuthenticated()) {
-         res.redirect('/homepage');
+        res.redirect('/homepage');
     } else {
-         next();
+        next();
     }
 };
 

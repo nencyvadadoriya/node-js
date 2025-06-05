@@ -23,60 +23,63 @@
                 </script>
                 <% } %>
 
-
                     <div class="page-wrapper">
-                        <div class="container-fluid" style="margin-top: 20px; height: 550px;">
+                        <div class="container-fluid" style="margin-top: 20px; height: auto;">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title mb-0">ExtraCategory Data</h5>
                                         </div>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Category Id</th>
-                                                    <th scope="col">SubCategory Id</th>
-                                                    <th scope="col">ExtraCategory Title</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <%allExtraCategory.map((data,index)=> { %>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            <%= index+1 %>
-                                                        </th>
-                                                        <td>
-                                                            <%= data.category_id.category_title %>
-                                                        </td>
-                                                        <td>
-                                                            <%= data.subCategory_id.subcategory_title %>
-                                                        </td>
 
-                                                        <td>
-                                                            <%= data.extraCategory_title %>
-                                                        </td>
-                                                        <td>
-                                                            <a href="/extracategory/updateExtracategorypage/<%= data.id %>"
-                                                                style="color: green;">
-                                                                <button class="btn btn-success">Edit</button>
-                                                            </a>
+                                        <% if (allExtraCategory.length===0) { %>
+                                            <h4 class="text-center text-danger">No ExtraCategory added yet.</h4>
+                                            <% } else { %>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Category Id</th>
+                                                            <th scope="col">SubCategory Id</th>
+                                                            <th scope="col">ExtraCategory Title</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% allExtraCategory.map((data, index)=> { %>
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    <%= index + 1 %>
+                                                                </th>
+                                                                <td>
+                                                                    <%= data.category_id.category_title %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= data.subCategory_id.subcategory_title %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= data.extraCategory_title %>
+                                                                </td>
+                                                                <td>
+                                                                    <a
+                                                                        href="/extracategory/updateExtracategorypage/<%= data.id %>">
+                                                                        <button class="btn btn-success">Edit</button>
+                                                                    </a>
+                                                                    <a
+                                                                        href="/extracategory/deleteExtracategory/<%= data.id %>">
+                                                                        <button class="btn btn-danger">Delete</button>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            <% }) %>
+                                                    </tbody>
+                                                </table>
+                                                <% } %>
 
-                                                            <a href="/extracategory/deleteExtracategory/<%= data.id%>"
-                                                                style="color: red;"><button
-                                                                    class="btn btn-danger">Delete</button></a>
-                                                        </td>
-                                                    </tr>
-
-                                                    <% })%>
-                                            </tbody>
-                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-
-                        <%- include('../footer') %>
+                    <%- include('../footer') %>

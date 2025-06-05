@@ -67,31 +67,35 @@
         }
     </style>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <body>
 
     <div class="login-card">
-        <% if (success && success.length > 0) { %>
+        <% if (success && success.length> 0) { %>
             <div class="alert alert-success">
-                <%= success[0] %>
+                <%= success %>
             </div>
-        <% } %>
-        <% if (error && error.length > 0) { %>
-            <div class="alert alert-danger">
-                <%= error[0] %>
-            </div>
-        <% } %>
-        <h3>Admin Login</h3>
-        <form method="post" action="/login">
-            <div class="mb-3">
-                <input type="email" name="email" class="form-control" placeholder="Enter Email" required />
-            </div>
-            <div class="mb-3">
-                <input type="password" name="password" class="form-control" placeholder="Enter Password" required />
-            </div>
-            <button type="submit" class="btn-login">Login</button>
-            <a href="/lostPasswordPage" class="forgot-link">Forgot password?</a>
-        </form>
+            <% } %>
+                <% if (error && error.length> 0) { %>
+                    <div class="alert alert-danger">
+                        <%= error %>
+                    </div>
+                    <% } %>
+                        <h3>Admin Login</h3>
+                        <form method="post" action="/login">
+                            <div class="mb-3">
+                                <input type="email" name="email" class="form-control" placeholder="Enter Email"
+                                    required />
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" name="password" class="form-control" placeholder="Enter Password"
+                                    required />
+                            </div>
+                            <button type="submit" class="btn-login">Login</button>
+                            <a href="/lostPasswordPage" class="forgot-link">Forgot password?</a>
+                        </form>
     </div>
 
 </body>
