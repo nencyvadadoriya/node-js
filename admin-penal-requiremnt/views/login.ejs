@@ -73,7 +73,7 @@
 <body>
 
     <div class="login-card">
-        <% if (success && success.length> 0) { %>
+        <!-- <% if (success && success.length> 0) { %>
             <div class="alert alert-success">
                 <%= success %>
             </div>
@@ -82,20 +82,31 @@
                     <div class="alert alert-danger">
                         <%= error %>
                     </div>
-                    <% } %>
-                        <h3>Admin Login</h3>
-                        <form method="post" action="/login">
-                            <div class="mb-3">
-                                <input type="email" name="email" class="form-control" placeholder="Enter Email"
-                                    required />
-                            </div>
-                            <div class="mb-3">
-                                <input type="password" name="password" class="form-control" placeholder="Enter Password"
-                                    required />
-                            </div>
-                            <button type="submit" class="btn-login">Login</button>
-                            <a href="/lostPasswordPage" class="forgot-link">Forgot password?</a>
-                        </form>
+                    <% } %> -->
+        <h3>Admin Login</h3>
+        <form method="post" action="/login">
+            <div class="mb-3">
+                <input type="email" name="email" class="form-control" placeholder="Enter Email" required />
+
+                <% if(error=='Please enter valid email address..' ) { %>
+                    <p style="color: red;">
+                        <%= error %>
+                    </p>
+
+                    <%}%>
+            </div>
+            <div class="mb-3">
+                <input type="password" name="password" class="form-control" placeholder="Enter Password" required />
+                <% if(error=='Please enter valid password..' ) { %>
+                    <p style="color: red;">
+                        <%= error %>
+                    </p>
+
+                    <%}%>
+            </div>
+            <button type="submit" class="btn-login">Login</button>
+            <a href="/lostPasswordPage" class="forgot-link">Forgot password?</a>
+        </form>
     </div>
 
 </body>

@@ -5,7 +5,6 @@ const fs = require('fs');
 // login page
 const loginPage = (req, res) => {
     const error = req.session.message;
-    console.log("LOGIN : --------------", error);
 
     res.render('login', { success: req.flash('success'), error: error });
 
@@ -47,7 +46,11 @@ const lostPasswordPage = (req, res) => {
 const otpVerifyPage = (req, res) => {
     const success = req.flash('success');
     const error = req.flash('error');
-    res.render('admin/otpVerifyPage', { success, error });
+    if (req.cookies.otp) {
+        res.render('admin/otpVerifyPage', { success, error });
+    } else {
+        res.redirect('/');
+    }
 };
 
 //check email
@@ -224,7 +227,7 @@ const changemypassword = async (req, res) => {
 // View Profile 
 const viewProfile = (req, res) => {
     try {
-        res.render('admin/profile', { currentAdmin: req.user });
+        res.render('admin/profile', { currentAdmin: req.user, success: req.flash('success'), error: req.flash('error') });
     } catch (error) {
         res.send(`<h2> Not found : ${error} </h2>`);
     }
@@ -260,7 +263,7 @@ const editProfile = async (req, res) => {
         if (updatedAdmin) {
             req.flash('success', 'Profile updated successfully!');
             res.cookie('admin', updatedAdmin);
-            res.redirect('/homepage');
+            res.redirect('/viewProfile');
         } else {
             req.flash('error', 'Profile update failed. Please try again.');
             res.redirect('/updateprofile');

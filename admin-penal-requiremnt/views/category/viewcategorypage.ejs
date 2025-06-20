@@ -1,6 +1,5 @@
 <%- include('../header') %>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <% if (success && success.length> 0) { %>
         <script>
             Swal.fire({
@@ -23,7 +22,7 @@
                 </script>
                 <% } %>
 
-                    <div class="container" style="margin-top: 5%; height: 510px;">
+                    <div class="container" style="margin-top: 5%;">
                         <div class="page-inner">
                             <div class="row">
                                 <div class="col-md-12">
@@ -56,12 +55,14 @@
                                                                     <td><img src="../<%= data.category_image %>"
                                                                             height="80px"></td>
                                                                     <td>
-                                                                        <a href="/category/deletecategory/<%= data.id%>"
-                                                                            class="btn btn-danger text-white">Delete</a>
+                                                                        <a href="javascript:void(0);"
+                                                                            onclick="confirmDelete('<%= data._id %>')"
+                                                                            class="btn btn-danger">Delete</a>
 
-                                                                        <a href="/category/updatecategory/<%= data.id%>"
+                                                                        <a href="/category/updatecategory/<%= data._id %>"
                                                                             class="btn btn-success text-white">Edit</a>
                                                                     </td>
+
                                                                 </tr>
                                                                 <% }) %>
                                                         </tbody>
@@ -73,3 +74,22 @@
                             </div>
                         </div>
                         <%- include('../footer') %>
+
+                            <script>
+                                function confirmDelete(categoryId) {
+                                    Swal.fire({
+                                        title: 'Are you sure?',
+                                        text: "This Category will be permanently deleted.",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#dc3545',
+                                        cancelButtonColor: '#6c757d',
+                                        confirmButtonText: 'Yes, delete it!',
+                                        cancelButtonText: 'Cancel'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = `/category/deletecategory/${categoryId}`;
+                                        }
+                                    });
+                                }
+                            </script>

@@ -4,6 +4,7 @@
       background-color: #eef2f7;
       font-family: sans-serif;
     }
+
     .profile-container {
       background-color: #fff;
       padding: 30px;
@@ -61,42 +62,75 @@
     }
   </style>
 
-<div class="profile-container">
-  <h3>Admin Profile</h3>
-  <table>
-    <tr>
-      <td class="label">First Name</td>
-      <td class="value"><%= currentAdmin.fname %></td>
-    </tr>
-    <tr>
-      <td class="label">Last Name</td>
-      <td class="value"><%= currentAdmin.lname %></td>
-    </tr>
-    <tr>
-      <td class="label">Email Address</td>
-      <td class="value"><%= currentAdmin.email %></td>
-    </tr>
-    <tr>
-      <td class="label">Password</td>
-      <td class="value">••••••••</td>
-    </tr>
-    <tr>
-      <td class="label">Gender</td>
-      <td class="value"><%= currentAdmin.gender %></td>
-    </tr>
-    <tr>
-      <td class="label">City</td>
-      <td class="value"><%= currentAdmin.city %></td>
-    </tr>
-    <tr>
-      <td class="label">Image</td>
-      <td class="value">
-        <img src="../<%= currentAdmin.image %>" alt="Profile Image" class="profile-pic" />
-      </td>
-    </tr>
-  </table>
-    <a href="/updateProfile" class="btn-edit">Edit Profile</a>
-  </div>
-  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <% if (success && success.length> 0) { %>
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: '<%= success %>',
+        confirmButtonColor: '#28a745'
+      });
+    </script>
+    <% } %>
 
-<%- include('../footer') %>
+      <% if (error && error.length> 0) { %>
+        <script>
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '<%= error %>',
+            confirmButtonColor: '#dc3545'
+          });
+        </script>
+        <% } %>
+
+          <div class="profile-container">
+            <h3>Admin Profile</h3>
+            <table>
+              <tr>
+                <td class="label">First Name</td>
+                <td class="value">
+                  <%= currentAdmin.fname %>
+                </td>
+              </tr>
+              <tr>
+                <td class="label">Last Name</td>
+                <td class="value">
+                  <%= currentAdmin.lname %>
+                </td>
+              </tr>
+              <tr>
+                <td class="label">Email Address</td>
+                <td class="value">
+                  <%= currentAdmin.email %>
+                </td>
+              </tr>
+              <tr>
+                <td class="label">Password</td>
+                <td class="value">••••••••</td>
+              </tr>
+              <tr>
+                <td class="label">Gender</td>
+                <td class="value">
+                  <%= currentAdmin.gender %>
+                </td>
+              </tr>
+              <tr>
+                <td class="label">City</td>
+                <td class="value">
+                  <%= currentAdmin.city %>
+                </td>
+              </tr>
+              <tr>
+                <td class="label">Image</td>
+                <td class="value">
+                  <img src="../<%= currentAdmin.image %>" alt="Profile Image" class="profile-pic" />
+                </td>
+              </tr>
+            </table>
+            <a href="/updateProfile" class="btn-edit">Edit Profile</a>
+          </div>
+
+
+          <%- include('../footer') %>

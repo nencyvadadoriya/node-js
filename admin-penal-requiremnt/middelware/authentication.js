@@ -16,14 +16,14 @@ passport.use('local', new localStrategy({
             console.log('Login Successfully....');
             return done(null, adminData);
         } else {
-            req.session.message = "Incorrect password";
+            req.session.message = "Please enter valid password..";
             console.log('Wrong Password....');
             return done(null, false);
         }
     } else {
-        req.session.message = "No user with that email";
+        req.session.message = "Please enter valid email address..";
         console.log('Wrong Email....');
-        return done(null, false, { message: 'No user email found' });
+        return done(null, false);
     }
 }));
 

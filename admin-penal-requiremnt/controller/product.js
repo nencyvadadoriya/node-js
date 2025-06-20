@@ -2,6 +2,7 @@ const Category = require("../model/categoryModel");
 const SubCategory = require("../model/subcategoryModel");
 const extracategory = require('../model/extraCategoryModel');
 const product = require('../model/product');
+const fs = require('fs');
 
 // add product page render 
 const addproductPage = async (req, res) => {
@@ -84,13 +85,13 @@ const deleteProduct = async (req, res) => {
     try {
         const deleteProduct = await product.findByIdAndDelete(id);
         if (deleteProduct) {
+            fs.unlinkSync(imagePath)
             req.flash("success", `${deleteProduct.product_name} deleted successfully.`);
         } else {
             req.flash("error", "Product not found.");
         }
     } catch (error) {
         console.log(error);
-        req.flash("error", "Something went wrong while deleting.");
     }
     res.redirect("/product/viewProductPage");
 }

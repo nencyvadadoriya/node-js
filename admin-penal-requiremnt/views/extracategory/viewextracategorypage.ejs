@@ -39,8 +39,8 @@
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
-                                                            <th scope="col">Category Id</th>
-                                                            <th scope="col">SubCategory Id</th>
+                                                            <th scope="col">Category Title</th>
+                                                            <th scope="col">SubCategory Title</th>
                                                             <th scope="col">ExtraCategory Title</th>
                                                             <th scope="col">Action</th>
                                                         </tr>
@@ -62,20 +62,17 @@
                                                                 </td>
                                                                 <td>
                                                                     <a
-                                                                        href="/extracategory/updateExtracategorypage/<%= data.id %>">
+                                                                        href="/extracategory/updateExtracategorypage/<%= data._id %>">
                                                                         <button class="btn btn-success">Edit</button>
                                                                     </a>
-                                                                    <a
-                                                                        href="/extracategory/deleteExtracategory/<%= data.id %>">
-                                                                        <button class="btn btn-danger">Delete</button>
-                                                                    </a>
+                                                                    <button class="btn btn-danger"
+                                                                        onclick="confirmDelete('<%= data._id %>')">Delete</button>
                                                                 </td>
                                                             </tr>
                                                             <% }) %>
                                                     </tbody>
                                                 </table>
                                                 <% } %>
-
                                     </div>
                                 </div>
                             </div>
@@ -83,3 +80,22 @@
                     </div>
 
                     <%- include('../footer') %>
+
+                        <script>
+                            function confirmDelete(extraCategoryId) {
+                                Swal.fire({
+                                    title: 'Are you sure?',
+                                    text: "This ExtraCategory will be permanently deleted.",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#dc3545',
+                                    cancelButtonColor: '#6c757d',
+                                    confirmButtonText: 'Yes, delete it!',
+                                    cancelButtonText: 'Cancel'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = `/extracategory/deleteExtracategory/${extraCategoryId}`;
+                                    }
+                                });
+                            }
+                        </script>

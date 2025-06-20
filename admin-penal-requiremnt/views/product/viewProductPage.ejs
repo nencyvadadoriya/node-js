@@ -49,60 +49,65 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <% allProducts.map((data, index)=> { %>
+                                                        <% if (allProducts.length===0) { %>
                                                             <tr>
-                                                                <th>
-                                                                    <%= ++index %>
-                                                                </th>
-                                                                <td>
-                                                                    <%= data.product_name %>
+                                                                <td colspan="11"
+                                                                    class="text-center text-danger fw-bold">
+                                                                    No products have been added yet.
                                                                 </td>
-                                                                <td>
-                                                                    <%= data.category_id.category_title %>
-                                                                </td>
-                                                                <td>
-                                                                    <%= data.subcategory_id.subcategory_title %>
-                                                                </td>
-                                                                <td>
-                                                                    <% if (data.extracategory_id) { %>
-                                                                        <%= data.extracategory_id.extraCategory_title %>
-                                                                            <% } else { %>
-                                                                                N/A
-                                                                                <% } %>
-
-                                                                </td>
-                                                                <td>₹<%= data.old_price %>
-                                                                </td>
-                                                                <td>₹<%= data.product_price %>
-                                                                </td>
-                                                                <td style="max-width: 200px;">
-                                                                    <%= data.product_desc %>
-                                                                </td>
-                                                                <td>
-                                                                    <%= data.product_stock %>
-                                                                </td>
-                                                                <td>
-                                                                    <img src="../<%= data.product_image %>"
-                                                                        alt="Product Image" height="80"
-                                                                        style="object-fit: cover; max-width: 100px;">
-                                                                </td>
-                                                                <td>
-                                                                    <div class="d-flex justify-content-center">
-                                                                        <a href="/product/updateProductpage/<%= data.id %>"
-                                                                            style="color: green;" class="me-2">
-                                                                            <button
-                                                                                class="btn btn-success">Edit</button>
-                                                                        </a>
-                                                                        <a href="/product/deleteProduct/<%= data.id %>"
-                                                                            style="color: red;">
-                                                                            <button
-                                                                                class="btn btn-danger">Delete</button>
-                                                                        </a>
-                                                                    </div>
-                                                                </td>
-
                                                             </tr>
-                                                            <% }) %>
+                                                            <% } else { %>
+                                                                <% allProducts.map((data, index)=> { %>
+                                                                    <tr>
+                                                                        <th>
+                                                                            <%= ++index %>
+                                                                        </th>
+                                                                        <td>
+                                                                            <%= data.product_name %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= data.category_id.category_title %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= data.subcategory_id.subcategory_title %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <% if (data.extracategory_id) { %>
+                                                                                <%= data.extracategory_id.extraCategory_title
+                                                                                    %>
+                                                                                    <% } else { %>
+                                                                                        N/A
+                                                                                        <% } %>
+                                                                        </td>
+                                                                        <td>₹<%= data.old_price %>
+                                                                        </td>
+                                                                        <td>₹<%= data.product_price %>
+                                                                        </td>
+                                                                        <td style="max-width: 200px;">
+                                                                            <%= data.product_desc %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= data.product_stock %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <img src="../<%= data.product_image %>"
+                                                                                alt="Product Image" height="80"
+                                                                                style="object-fit: cover; max-width: 100px;">
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="d-flex justify-content-center">
+                                                                                <a href="/product/updateProductpage/<%= data._id %>"
+                                                                                    class="me-2">
+                                                                                    <button
+                                                                                        class="btn btn-success">Edit</button>
+                                                                                </a>
+                                                                                <button class="btn btn-danger"
+                                                                                    onclick="confirmDelete('<%= data._id %>')">Delete</button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% }) %>
+                                                                        <% } %>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -115,3 +120,22 @@
                     </div>
 
                     <%- include('../footer') %>
+
+                        <script>
+                            function confirmDelete(productId) {
+                                Swal.fire({
+                                    title: 'Are you sure?',
+                                    text: "This product will be permanently deleted.",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#dc3545',
+                                    cancelButtonColor: '#6c757d',
+                                    confirmButtonText: 'Yes, delete it!',
+                                    cancelButtonText: 'Cancel'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = `/product/deleteProduct/${productId}`;
+                                    }
+                                });
+                            }
+                        </script>

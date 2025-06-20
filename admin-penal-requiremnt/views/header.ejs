@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,6 +17,31 @@
     <link href="../../css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+<style>
+    #sidebar.sidebar {
+        width: 180px !important;
+    }
+
+    .main {
+        margin-left: 0px !important;
+    }
+
+    .sidebar .sidebar-link {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        font-size: 15px;
+    }
+
+    .sidebar .sidebar-link i {
+        margin-right: 6px;
+    }
+
+    .sidebar .sidebar-brand {
+        font-size: 16px;
+        padding: 15px;
+    }
+</style>
+
 
 <body>
     <div class="wrapper">
@@ -37,29 +61,39 @@
                     </li>
                     <!-- Admin dropdown -->
                     <li class="sidebar-item">
-                        <a data-bs-toggle="collapse" href="#adminMenu" class="sidebar-link collapsed"
+                        <a data-bs-toggle="collapse" href="#adminMenu"
+                            class="sidebar-link collapsed d-flex justify-content-between align-items-center"
                             aria-expanded="false">
-                            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Admin</span>
+                            <div>
+                                <i class="align-middle me-2" data-feather="users"></i>
+                                <span class="align-middle">Admin</span>
+                            </div>
+                            <i class="align-middle" data-feather="chevron-down"></i>
                         </a>
                         <ul id="adminMenu" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="/addAdmin">
-                                    <i class="align-middle" data-feather="user-plus"></i> Add Admin
+                                    <i class="align-middle me-2" data-feather="user-plus"></i> Add Admin
                                 </a>
                             </li>
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="/viewAdmin">
-                                    <i class="align-middle" data-feather="eye"></i> View Admin
+                                    <i class="align-middle me-2" data-feather="eye"></i> View Admin
                                 </a>
                             </li>
                         </ul>
                     </li>
 
-                    <!-- cetegory  dropdown -->
+                    <!-- category dropdown -->
                     <li class="sidebar-item">
-                        <a data-bs-toggle="collapse" href="#categoryMenu" class="sidebar-link collapsed"
+                        <a data-bs-toggle="collapse" href="#categoryMenu"
+                            class="sidebar-link collapsed d-flex justify-content-between align-items-center"
                             aria-expanded="false">
-                            <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Category</span>
+                            <div>
+                                <i class="align-middle" data-feather="grid"></i>
+                                <span class="align-middle">Category</span>
+                            </div>
+                            <i class="align-middle" data-feather="chevron-down"></i>
                         </a>
                         <ul id="categoryMenu" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
@@ -74,22 +108,25 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- sub category dropdown -->
+
+                    <!-- Sub Category dropdown -->
                     <li class="sidebar-item">
-                        <a data-bs-toggle="collapse" href="#subCategoryMenu" class="sidebar-link collapsed"
+                        <a data-bs-toggle="collapse" href="#subCategoryMenu"
+                            class="sidebar-link collapsed d-flex justify-content-between align-items-center"
                             aria-expanded="false">
-                            <i class="align-middle" data-feather="layers"></i>
-                            <span class="align-middle">Sub Category</span>
+                            <div>
+                                <i class="align-middle" data-feather="layers"></i>
+                                <span class="align-middle">Sub Category</span>
+                            </div>
+                            <i class="align-middle" data-feather="chevron-down"></i>
                         </a>
                         <ul id="subCategoryMenu" class="sidebar-dropdown list-unstyled collapse"
                             data-bs-parent="#sidebar">
-                            <!-- Add Sub Category -->
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="/subcategory/addSubCategoryPage">
                                     <i class="align-middle" data-feather="plus-square"></i> Add Sub Category
                                 </a>
                             </li>
-                            <!-- View Sub Category -->
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="/subcategory/viewsubcategory">
                                     <i class="align-middle" data-feather="list"></i> View Sub Category
@@ -98,21 +135,23 @@
                         </ul>
                     </li>
 
-                    <!-- extra category -->
+                    <!-- Extra Category dropdown -->
                     <li class="sidebar-item">
-                        <a data-bs-toggle="collapse" href="#brandMenu" class="sidebar-link collapsed"
+                        <a data-bs-toggle="collapse" href="#brandMenu"
+                            class="sidebar-link collapsed d-flex justify-content-between align-items-center"
                             aria-expanded="false">
-                            <i class="align-middle" data-feather="tag"></i>
-                            <span class="align-middle">Extra Category</span>
+                            <div>
+                                <i class="align-middle" data-feather="tag"></i>
+                                <span class="align-middle">Extra Category</span>
+                            </div>
+                            <i class="align-middle" data-feather="chevron-down"></i>
                         </a>
                         <ul id="brandMenu" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <!-- Add extra category -->
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="/extracategory/addextracategoryPage">
                                     <i class="align-middle" data-feather="plus-square"></i> Add Extra Category
                                 </a>
                             </li>
-                            <!-- View extra category -->
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="/extracategory/viewextracategorypage">
                                     <i class="align-middle" data-feather="list"></i> View Extra Category
@@ -121,21 +160,23 @@
                         </ul>
                     </li>
 
-                    <!-- product section -->
+                    <!-- Product dropdown -->
                     <li class="sidebar-item">
-                        <a data-bs-toggle="collapse" href="#productMenu" class="sidebar-link collapsed"
+                        <a data-bs-toggle="collapse" href="#productMenu"
+                            class="sidebar-link collapsed d-flex justify-content-between align-items-center"
                             aria-expanded="false">
-                            <i class="align-middle" data-feather="package"></i>
-                            <span class="align-middle">Product</span>
+                            <div>
+                                <i class="align-middle" data-feather="package"></i>
+                                <span class="align-middle">Product</span>
+                            </div>
+                            <i class="align-middle" data-feather="chevron-down"></i>
                         </a>
                         <ul id="productMenu" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <!-- Add product -->
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="/product/addproductPage">
                                     <i class="align-middle" data-feather="plus-square"></i> Add Product
                                 </a>
                             </li>
-                            <!-- View product -->
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="/product/viewProductPage">
                                     <i class="align-middle" data-feather="list"></i> View Product
@@ -143,7 +184,6 @@
                             </li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
         </nav>
@@ -309,15 +349,21 @@
                             </a>
                             <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
                                 data-bs-toggle="dropdown">
-                                <img src="../../<%= currentAdmin.image  %>" class="avatar img-fluid rounded me-1 "
+                                <img src="../../<%= currentAdmin.image  %>" class="avatar img-fluid rounded-4 me-1 "
                                     width="50px" />
-                                <%= currentAdmin.fname + " " + currentAdmin.lname%>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="/viewProfile"> Profile</a>
-                                <a class="dropdown-item" href="/changePassword">Change Password</a>
-                                <a class="dropdown-item" href="/logout">Log out</a>
+                                <a class="dropdown-item" href="/viewProfile">
+                                    <i data-feather="user" class="me-2"></i> Profile
+                                </a>
+                                <a class="dropdown-item" href="/changePassword">
+                                    <i data-feather="lock" class="me-2"></i> Change Password
+                                </a>
+                                <a class="dropdown-item" href="/logout">
+                                    <i data-feather="log-out" class="me-2"></i> Log out
+                                </a>
                             </div>
+
                         </li>
                     </ul>
                 </div>
