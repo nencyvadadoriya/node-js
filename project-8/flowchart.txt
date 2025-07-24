@@ -1,0 +1,67 @@
+=======================================================================
+AUTH MODULE
+=======================================================================
+POST   /api/register                   ➤ Register with role (passenger/hostess/supervisor)
+POST   /api/login                      ➤ Login
+GET    /api/profile                    ➤ View profile
+PUT    /api/profile/update             ➤ Update profile
+POST   /api/forgot-password            ➤ Request OTP
+PUT    /api/reset-password             ➤ Reset password
+POST   /api/stauts                     ➤ Change stauts
+
+=======================================================================
+SUPERVISOR MODULE (Supervisor Only)
+=======================================================================
+POST   /api/supervisor/create-hostess  ➤ Assign air hostess to flight
+GET    /api/supervisor/hostesses       ➤ View all hostesses
+PUT    /api/supervisor/hostess/:id     ➤ Update air hostess info
+DELETE /api/supervisor/hostess/:id     ➤ Remove air hostess
+GET    /api/supervisor/flights         ➤ View assigned flights
+
+=======================================================================
+AIR HOSTESS MODULE (Air Hostess Only)
+=======================================================================
+GET    /api/hostess/flights            ➤ View assigned flights
+GET    /api/hostess/passengers/:fid    ➤ View passengers of a flight  
+PUT    /api/hostess/checkin/:pid       ➤ Mark passenger checked-in
+
+=======================================================================
+PASSENGER MODULE (Passenger Only)
+=======================================================================
+GET    /api/flights/search             ➤ Search flights 
+POST   /api/bookings                   ➤ Book a ticket 
+GET    /api/my-bookings                ➤ View bookings 
+PUT    /api/checkin/:bookingId         ➤ Check-in
+DELETE /api/cancel/:bookingId          ➤ Cancel booking
+
+=======================================================================
+ADMIN MODULE (Admin Only)
+=======================================================================
+POST   /api/flights                    ➤ Create new flight
+PUT    /api/flights/:id                ➤ Update flight
+DELETE /api/flights/:id                ➤ Delete flight
+GET    /api/flights                    ➤ View all flights
+POST   /api/admin/create-supervisor    ➤ Create Supervisor
+GET    /api/admin/getallsupervisor     ➤ List supervisors 
+=======================================================================
+MONGOOSE MODELS
+=======================================================================
+🧑 User Model:
+- name, email, password, role: passenger | hostess | supervisor | admin
+
+🛫 Flight Model:
+- flightNumber, origin, destination, departureTime, arrivalTime
+- assignedHostesses: [userIds]
+- assignedSupervisor: userId
+
+🎫 Booking Model:
+- flightId, passengerId, seatNumber, bookingDate, isCheckedIn
+
+
+                     [Admin]
+                        ↓
+               [Supervisor (1 per flight)]
+                        ↓
+        [Air Hostess] — assigned to → [Flights]
+                        ↓
+               [Passenger Bookings]
